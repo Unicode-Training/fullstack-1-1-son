@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="name">Tên</label>
+        <input type="text" id="name" name="name" placeholder="Họ và tên..." />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email..." />
+      </div>
+      <div>
+        <label for="password">Mật khẩu</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Mật khẩu..."
+        />
+      </div>
+      <div>
+        <label for="age">Tuổi</label>
+        <input
+          type="number"
+          min="18"
+          max="50"
+          id="age"
+          name="age"
+          placeholder="Tuổi..."
+        />
+      </div>
+      <div>
+        <label for="birthday">Ngày sinh</label>
+        <input type="date" id="birthday" name="birthday" />
+      </div>
+      <div>
+        <label for="avatar">Avatar</label>
+        <input type="file" id="avatar" name="avatar" />
+      </div>
+      <div>
+        <label>Giới tính</label>
+        <label>
+          <input type="radio" name="gender" value="male" checked />
+          Nam
+        </label>
+        <label>
+          <input type="radio" name="gender" value="female" />
+          Nữ
+        </label>
+        <label>
+          <input type="radio" name="gender" value="unknown" />
+          Không biết
+        </label>
+      </div>
+      <div>
+        <label>Sở thích</label>
+        <label>
+          <input type="checkbox" name="hobby" value="sport" /> Thể thao
+        </label>
+        <label>
+          <input type="checkbox" name="hobby" value="music" checked /> Nghe nhạc
+        </label>
+        <label>
+          <input type="checkbox" name="hobby" value="walking" /> Đi bộ
+        </label>
+      </div>
+      <div>
+        <label for="province">Tỉnh/Thành phố</label>
+        <select name="province" id="province">
+          <option value="0">Chọn Tỉnh/Thành phố</option>
+          <option value="1">Hà Nội</option>
+          <option value="2">Đà Nẵng</option>
+          <option value="3">Hồ Chí Minh</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Tin nhắn</label>
+        <textarea
+          name="message"
+          id="message"
+          placeholder="Tin nhắn..."
+        ></textarea>
+      </div>
+      <button>Gửi</button>
+    </form>
+  </body>
+</html>

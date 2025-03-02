@@ -102,3 +102,9 @@ Semantic (Ngữ nghĩa)
 ```
 <a href="dia-chi-trang-web">Nội dung hiển thị</a>
 ```
+
+2. Thẻ chèn hình ảnh (img)
+
+```
+<img src="dia-chi-anh" alt="Nội dung thay thế" title="Tiêu đề khi trỏ chuột" width="chieu rong" height="chieu cao"/>
+```
