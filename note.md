@@ -108,3 +108,103 @@ Semantic (Ngữ nghĩa)
 ```
 <img src="dia-chi-anh" alt="Nội dung thay thế" title="Tiêu đề khi trỏ chuột" width="chieu rong" height="chieu cao"/>
 ```
+
+## CSS
+
+- Ngôn ngữ định dạng cho trang web
+- Tác dụng: Làm đẹp, tạo bố cục cho trang web
+
+### Cách thêm css vào trang web html
+
+1. Tạo thẻ style trong trang html (Internal CSS)
+
+```
+<style>
+    Code CSS
+</style>
+```
+
+Lưu ý: Thường thẻ <style> đặt trước thẻ </head>
+
+2. Tạo file css sau đó liên kết với file html (External CSS)
+
+```
+<link href="duong-dan-toi-file-css" rel="stylesheet" />
+```
+
+3. Thêm css trực tiếp trong thẻ html thông qua thuộc tính style (Inline CSS)
+
+### Selector (Bộ chọn)
+
+- Chọn các phần tử html muốn định dạng trong trang web
+- Trong tất cả các thẻ html luôn có 2 thuộc tính là id và class
+
+Class được phép đặt nhiều trong cùng 1 thẻ html (Mỗi class cách nhau bởi dấu cách)
+Id chỉ được phép đặt 1
+
+Lưu ý: Không được đặt id, class bắt đầu bằng số và nên sử dụng Tiếng việt, dùng danh tù
+
+1. id, class, tagname
+
+id ==> #id
+class ==> .class
+tagname ==> tagname
+
+2. Kết hợp selector
+
+2.1. Kết hợp nằm trong
+
+```
+selector1 selector2 selector3 {
+    code css
+}
+
+```
+
+2.2. Kết hợp cha con
+
+```
+selector1 > selector2 > selector3 {
+    code css
+}
+```
+
+2.3. Kết hợp cùng cấp
+
+```
+selector1selector2selector3 {
+    code css
+}
+```
+
+2.4. Kết hợp kế thừa
+
+```
+selector1, selector2, selector3 {
+    code css
+}
+```
+
+2.5. Kết hợp ngang hàng nằm sau
+
+```
+selector1 ~ selector2 ~ selector3 {
+    code css
+}
+```
+
+2.6. Kết hợp ngang hàng liền kề
+
+```
+selector1 + selector2 + selector3 {
+    code css
+}
+```
+
+2.7. Attribute selector (Chọn theo thuộc tính của thẻ html)
+
+tenthe[tenthuoctinh] --> Chọn thẻ html có thuộc tính
+tenthe[tenthuoctinh="giatri"] --> Chọn thẻ html có thuộc tính bằng giá trị (So sánh tuyệt đối)
+tenthe[tenthuoctinh^="giatri"] --> Chọn thẻ html có thuộc tính bắt đầu bằng giá trị
+tenthe[tenthuoctinh*="giatri"] --> Chọn thẻ html có thuộc tính chứa giá trị
+tenthe[tenthuoctinh$="giatri"] --> Chọn thẻ html có thuộc tính cuối cùng bằng giá trị
