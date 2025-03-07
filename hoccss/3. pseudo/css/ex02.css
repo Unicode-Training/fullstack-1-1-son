@@ -1,0 +1,39 @@
+/* h1:hover {
+  color: red;
+}
+h1:active {
+  color: green;
+}
+input:focus,
+button:focus {
+  background: yellow;
+}
+input:focus::placeholder {
+  color: red;
+} */
+/* input:checked + span {
+  color: red;
+} */
+
+/* input:disabled + span {
+  color: gray;
+} */
+/* ul li:not(.active, .text) {
+  color: red;
+} */
+/* ul li:first-child {
+  color: red;
+}
+ul li:last-child {
+  color: green;
+} */
+/* ul li:nth-child(2n + 2) {
+  color: red;
+} */
+/* input:valid + button {
+  color: red;
+} */
+
+#toggle:checked + p {
+  color: red;
+}

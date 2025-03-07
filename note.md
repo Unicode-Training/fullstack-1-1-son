@@ -208,3 +208,25 @@ tenthe[tenthuoctinh="giatri"] --> Chọn thẻ html có thuộc tính bằng gi�
 tenthe[tenthuoctinh^="giatri"] --> Chọn thẻ html có thuộc tính bắt đầu bằng giá trị
 tenthe[tenthuoctinh*="giatri"] --> Chọn thẻ html có thuộc tính chứa giá trị
 tenthe[tenthuoctinh$="giatri"] --> Chọn thẻ html có thuộc tính cuối cùng bằng giá trị
+
+### Pseudo
+
+- Phần tử giả (Pseudo Element)
+  Cú pháp: selector::tenphantu
+  - before
+  - after
+  - first-line
+  - first-letter
+  - selection
+  - placeholder
+- Lớp giả (Pseudo Class)
+  Cú pháp: selector:tenlop
+
+* hover, active, focus (Chỉ áp dụng với form)
+* checked (Radio, Checkbox)
+* disabled (Áp dụng với form)
+* not --> loại trừ selector
+* first-child --> Chọn phần tử con đầu tiên
+* last-child --> Chọn phần tử con cuối cùng
+* nth-child --> Chọn phần tử bất kỳ theo số thứ tự
+* valid --> Thẻ input có nội dung (Kết hợp với required)
