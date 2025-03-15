@@ -1,0 +1,21 @@
+/* body {
+  background-color: yellow;
+}
+
+p {
+  background-color: red;
+  color: #fff;
+} */
+
+body {
+  height: 2000px;
+  /* background-image: url("https://fastly.picsum.photos/id/804/536/354.jpg?hmac=kNDCsk1zjrqxEdNUAHmGs3Tmvn3MzOugnSPD0lQ8OVA");
+  background-repeat: no-repeat;
+  background-position: 0 0; */
+  /* background-size: 100% 300px; */
+  /* background-attachment: fixed; */
+
+  background: fixed yellow
+    url("https://fastly.picsum.photos/id/804/536/354.jpg?hmac=kNDCsk1zjrqxEdNUAHmGs3Tmvn3MzOugnSPD0lQ8OVA")
+    no-repeat 0 0 / 400px 400px;
+}

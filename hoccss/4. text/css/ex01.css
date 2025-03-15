@@ -1,0 +1,31 @@
+/* p {
+  color: rgb(152, 10, 162);
+}
+
+.title-1 {
+  color: red;
+}
+.title-2 {
+  color: rgba(255, 0, 0, 0.479);
+} */
+/* html {
+  font-size: 10px;
+}
+.box {
+  font-size: 30px;
+}
+p {
+  font-size: 2.4rem;
+} */
+/* @font-face {
+  font-family: "SVN Fontbox";
+  src: url("../fonts/SVN-Fontbox-Boathouse-Filled.otf");
+} */
+p {
+  /* line-height: 1.5; */
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  letter-spacing: 3px;
+  word-spacing: 5px; /*abc*/
+}

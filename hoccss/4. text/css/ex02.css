@@ -1,0 +1,13 @@
+/* h2 {
+  border: 1px solid red;
+  width: 300px;
+  word-wrap: break-word;
+} */
+
+/* p {
+  text-indent: 10px;
+} */
+
+p {
+  text-align: justify;
+}

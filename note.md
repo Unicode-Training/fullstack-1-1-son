@@ -230,3 +230,149 @@ tenthe[tenthuoctinh$="giatri"] --> Chọn thẻ html có thuộc tính cuối c�
 * last-child --> Chọn phần tử con cuối cùng
 * nth-child --> Chọn phần tử bất kỳ theo số thứ tự
 * valid --> Thẻ input có nội dung (Kết hợp với required)
+
+### Các thuộc tính định dạng văn bản
+
+1. Thuộc tính color
+
+- Thay đổi màu văn bản
+
+2. Thuộc tính font-size
+
+- Thay đổi cỡ chữ của văn bản
+- Đơn vị:
+
+* Tuyệt đối: px
+* Tương đối: em, rem
+
+Đơn vị em: Tỷ lệ với font-size của thẻ cha
+Đơn vị rem: Tỷ lệ với font-size của mặc định trình duyệt
+
+3. Thuộc tính line-height
+
+- Thay đổi chiều cao của dòng văn bản
+- Tỷ lệ với font-size của chính nó
+
+4. Thuộc tính font-family
+
+- Thay đổi font chữ của văn bản
+
+5. Thuộc tính font-weight
+
+- Thay đổi độ dày của văn bản
+
+6. Thuộc tính font-style
+
+- Thiết lập chữ nghiêng
+
+7. Thuộc tính letter-spacing
+
+- Thay đổi khoảng cách giữa các ký tự
+
+8. Thuộc tính word-spacing
+
+- Thay đổi khoảng cách giữa các từ
+
+9. Thuộc tính word-wrap
+
+- Wrap văn bản bị tràn
+
+10. Thuộc tính text-indent
+
+- Tạo khoảng cách của dòng đầu tiên trong văn bản so với lề trái
+
+11. Thuộc tính text-align
+
+- Căn chỉnh văn bản theo chiều ngang
+
+* left
+* center
+* right
+* justify
+
+### Thuộc tính background
+
+Thay đổi nền của phần tử html: màu, ảnh
+
+1. background-color
+
+Thay đổi màu nền
+
+2. background-image
+
+Thay đổi hình nền
+
+3. background-repeat
+
+Thay đổi chế độ lặp của hình nền
+
+4. background-position
+
+Thay đổi vị trí của background
+
+5. background-size
+
+Thay đổi kích thước của ảnh nền
+
+6. background-attachment
+
+Cố định hình nền khi kéo thanh cuộn
+
+7. background
+
+background: color image repeat position / size attachment
+
+### Thuộc tính border
+
+Tạo đường viền cho phần tử html
+
+Border = width + style + color
+
+- border-width --> Độ dày của bordeer
+- border-style --> Kiểu (solid, dashed, dotted, double)
+- border-color --> Màu của border (Mặc định màu đen)
+
+Thuộc tính mở rộng (của 3 thuộc tính trên)
+
+border-{side}-width
+border-{side}-style
+border-{side}-color
+
+side: cạnh (top, left, right, bottom)
+
+- border-top-width
+- border-left-width
+- border-right-width
+- border-bottom-width
+
+- border-top-style
+- border-left-style
+- border-right-style
+- border-bottom-style
+
+- border-top-color
+- border-left-color
+- border-right-color
+- border-bottom-color
+
+Thuộc tính viết tắt
+
+- border: width style color
+- border-{side}: width style color
+
+side: cạnh (top, left, right, bottom)
+
+==>
+
+- border-top
+- border-left
+- border-right
+- border-bottom
+
+### Thuộc tính border-radius
+
+Bo góc các phần tử html
+
+border-radius: giatri
+
+Nếu hình vuông và border-radius >= 50% ==> Tạo thành hình tròn
