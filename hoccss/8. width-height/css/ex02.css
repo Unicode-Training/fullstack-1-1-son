@@ -1,0 +1,12 @@
+.wrapper {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+.box {
+  background: green;
+  height: 300px;
+  width: 100px;
+  max-width: 100%;
+  min-width: 200px;
+}

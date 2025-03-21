@@ -1,0 +1,19 @@
+body {
+  height: 2000px;
+}
+.wrapper {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+}
+.box {
+  border: 1px solid green;
+  width: 50%;
+  height: 100vh;
+}
+a {
+  border: 1px solid red;
+  width: 300px;
+  height: 150px;
+  /* display: inline-block; */
+}

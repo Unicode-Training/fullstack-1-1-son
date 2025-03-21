@@ -376,3 +376,65 @@ Bo góc các phần tử html
 border-radius: giatri
 
 Nếu hình vuông và border-radius >= 50% ==> Tạo thành hình tròn
+
+### Thuộc tính width - height
+
+- width: Chiều rộng
+- height: Chiều cao
+- Đơn vị: px, % (Tỷ lệ theo width, height của thẻ cha), vw, vh
+
+Lưu ý: width, height chỉ tác dụng với các thẻ block
+
+inline không thay đổi được width, height. Muốn thay đổi phải chuyển thành block (đổi thẻ html, display: block hoặc display: inline-block)
+
+Đơn vị vw = viewport width
+Đơn vị vh = viewport height
+
+### padding - margin
+
+- padding: Tạo khoảng cách đệm giữa border và nội dung của thẻ html
+- margin: Tạo khoảng cách lề bên ngoài border so với thẻ html khác
+
+Lưu ý:
+
+- padding, margin không có tác dụng top và bottom với thẻ inline
+- Nếu dùng đơn vị % --> Tỷ lệ với width của thẻ cha
+
+Các thuộc tính mở rộng
+
+- padding-top
+- padding-left
+- padding-right
+- padding-bottom
+
+- margin-top
+- margin-left
+- margin-right
+- margin-bottom
+
+Lưu ý margin
+
+- Cho phép giá trị âm
+- Có giá trị auto
+
+### Box model
+
+- Mặc định khi set width, height --> Kích thước của content
+- Muốn đổi theo kích thước của border dùng thuộc tính box-sizing
+
+### Reset CSS
+
+- Mặc định các trình duyệt sẽ có sẵn css để tác động với các thẻ html --> Vỡ layout
+- Nên reset tất cả các thẻ html về mặc định:
+
+* padding: 0;
+* margin: 0;
+* box-sizing: border-box
+* border: 0;
+
+### Display
+
+- block
+- inline
+- inline-block
+- none
