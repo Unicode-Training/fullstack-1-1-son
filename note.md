@@ -438,3 +438,55 @@ Lưu ý margin
 - inline
 - inline-block
 - none
+
+### Flex (Flexible Box Module)
+
+- Kỹ thuật chia layout (bố cục) trang web một cách linh hoạt và mềm dẻo (Giải quyết các nhược điểm của các cách cũ: inline-block, float)
+- Cấu tạo flex
+
+* Trục: Trục chính và trục vuông góc, vị trí trục (start, center, end)
+* Flex container và Flex item
+
+1. Các thuộc tính trong nhóm flex container
+
+- display: flex --> Kích hoạt flexbox
+- flex-direction: Chọn hướng cho trục chính (Mặc định row = nằm ngang)
+
+* row: Nằm ngang theo chiều từ trái sang phải
+* row-reserse: Nằm ngang theo chiều từ phải sang trái (Đảo ngược)
+* column: Nằm dọc theo chiều từ trên xuống dưới
+* column-reverse: Nằm dọc theo chiều từ dưới lên trên
+
+- justify-content: Căn chỉnh các item theo hướng song song với trục chính
+
+* flex-start
+* center
+* flex-end
+* space-around
+* space-between
+* space-evenly
+
+- align-items: Căn chỉnh các item theo hướng song song với trục cross (Vuông góc với trục chính)
+
+* stretch
+* flex-start
+* center
+* baseline
+* flex-end
+
+- flex-wrap: Wrap các item khi vượt quá ra khỏi kích thước container (Xuống dòng)
+
+* nowrap
+* wrap
+* wrap-reverse
+
+- gap: Căn chỉnh khoảng cách giữa các item
+- row-gap: Căn chỉnh gap theo hàng
+- column-gap: Căn chỉnh gap theo cột
+
+2. Các thuộc tính trong nhóm flex item
+
+- flex-grow: Tính toán tỉ lệ của item để lấp đầy khoảng cách còn trống của container
+- flex-shrink: Tính toán tỉ lệ để tự động co lại các item khi bị tràn ra ngoài container
+- flex-basis: Thiết lập kích thước ban đầu cho các item
+- order: Sắp xếp vị trí các item theo mong muốn
