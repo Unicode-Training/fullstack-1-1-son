@@ -490,3 +490,22 @@ Lưu ý margin
 - flex-shrink: Tính toán tỉ lệ để tự động co lại các item khi bị tràn ra ngoài container
 - flex-basis: Thiết lập kích thước ban đầu cho các item
 - order: Sắp xếp vị trí các item theo mong muốn
+
+## Position
+
+- Nhóm các thuộc tính giúp căn chỉnh vị trí chính xác của các phần tử html
+- Các loại position:
+
+* static: Không có position, sắp xếp tuần tự các thẻ html
+* relative: Vị trí tương đối
+* absolute: Vị trí tuyệt đối
+* fixed: Vị trí cố định (Khi thay đổi thanh cuộn)
+
+- Khi 1 thẻ html được kích hoạt position (Trừ static) thì sẽ có các thuộc tính sau
+
+* top
+* left
+* right
+* bottom
+* z-index
+* inset

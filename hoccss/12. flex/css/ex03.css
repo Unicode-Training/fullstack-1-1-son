@@ -27,23 +27,51 @@ a {
 }
 .posts .posts-row {
   display: flex;
+  margin: 0 -10px;
 }
 .posts .posts-row .column-small {
   width: 25%;
+  padding: 0 10px;
 }
 .posts .posts-row .column-large {
   width: 50%;
+  padding: 0 10px;
 }
 .posts .post-list .post-item {
   display: flex;
   gap: 10px;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 15px;
-  margin-bottom: 15px;
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+}
+.posts .post-list .post-item .image {
+  width: 30%;
 }
 .posts .post-list .post-item img {
   display: block;
 }
 .posts .post-list .post-item .title {
   font-size: 1.4rem;
+  width: 70%;
+}
+.posts .featured-post img {
+  display: block;
+}
+.posts .featured-post h1 {
+  font-size: 2.4rem;
+}
+.posts .featured-post h1,
+.posts .featured-post p {
+  padding: 5px 0;
+}
+.posts .featured-post ul {
+  list-style: inside;
+  padding-top: 5px;
+}
+.posts .post-one-column .post-item {
+  margin-bottom: 15px;
+}
+.posts .post-one-column .post-item h2 {
+  font-size: 1.6rem;
+  padding-top: 10px;
 }
