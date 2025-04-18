@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.box {
+  width: 500px;
+  height: 500px;
+  border: 1px solid red;
+  margin: 30px auto;
+  transition: 1s ease;
+  transition-property: background, font-size;
+  overflow: hidden;
+}
+.box:hover {
+  background: yellow;
+  font-size: 30px;
+}
+.box h2 {
+  transition-property: padding-left, color;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+  text-wrap: nowrap;
+}
+.box:hover h2 {
+  padding-left: 300px;
+  color: red;
+}

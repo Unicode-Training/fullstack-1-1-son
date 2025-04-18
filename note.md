@@ -509,3 +509,23 @@ Lưu ý margin
 * bottom
 * z-index
 * inset
+
+## Transition
+
+- Thuộc tính cho phép tạo hiệu ứng chuyển động mượt mà
+- Chỉ áp dụng với các thuộc tính có giá trị là số (Bao gồm cả màu)
+
+Các thuộc tính
+
+- transition-property: danh-sach-thuoc-tinh (Ví dụ: transition-property: padding-left, color)
+- transition-duration: thoigian (s, ms) --> Thời gian hoàn thành chuyển động
+- transition-delay: thoigian (s, ms) --> Thời gian trễ trước khi hiệu ứng hoạt động
+- transition-timing-function: Quy ước tốc độ di chuyển
+
+* ease: (Mặc định) --> Chậm, nhanh, chậm
+* ease-in: Chậm, nhanh
+* ease-out: Nhanh, chậm
+* ease-in-out: Chậm, nhanh, chậm
+* linear: Đều (Giữ 1 tốc độ)
+
+- transition: property duration delay timing-function
