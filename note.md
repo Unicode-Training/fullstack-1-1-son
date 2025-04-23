@@ -529,3 +529,53 @@ Các thuộc tính
 * linear: Đều (Giữ 1 tốc độ)
 
 - transition: property duration delay timing-function
+
+## Transform
+
+- Thuộc tính giúp thay đổi hình dạng của các phần tử html
+- Thay đổi: Xoay, Nghiêng, Phóng to, thu nhỏ, di chuyển
+
+## Animation
+
+1. keyframes
+   Chia khoảng thời gian
+
+```css
+@keyframes tenkeyframe {
+  from {
+  }
+
+  to {
+  }
+}
+```
+
+from: 0% so với duration
+to: 100% so với duration
+
+Lưu ý: Ngoài ra, có thể đặt thêm các khoảng cách bằng cách dùng đơn vị %
+
+```css
+@keyframes tenkeyframe {
+  from {
+  }
+
+  30% {
+  }
+
+  60% {
+  }
+
+  to {
+  }
+}
+```
+
+2. Thuộc tính animation
+
+- animation-name: tenkeyframe
+- animation-duration: thoigian
+- animation-delay: thoigian
+- animation-timing-function: ease|ease-in|ease-out|ease-in-out|linear
+- animation-interation-count: number --> Số lần chạy hiệu ứng, nếu muốn chạy vô hạn dùng infinite
+- animation: name duration delay timing-function interation-count
