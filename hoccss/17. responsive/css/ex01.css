@@ -1,0 +1,52 @@
+body {
+  color: green;
+}
+
+h1 {
+  font-style: italic;
+}
+
+@media screen and (max-width: 1200px) {
+  body {
+    color: red;
+  }
+  h1 {
+    font-style: normal;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  body {
+    color: blue;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    color: blueviolet;
+  }
+  h1 {
+    font-style: italic;
+  }
+}
+/* body {
+  color: blueviolet;
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    color: green;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    color: blue;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  body {
+    color: red;
+  }
+}  */

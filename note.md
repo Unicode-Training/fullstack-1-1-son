@@ -579,3 +579,56 @@ Lưu ý: Ngoài ra, có thể đặt thêm các khoảng cách bằng cách dùn
 - animation-timing-function: ease|ease-in|ease-out|ease-in-out|linear
 - animation-interation-count: number --> Số lần chạy hiệu ứng, nếu muốn chạy vô hạn dùng infinite
 - animation: name duration delay timing-function interation-count
+
+## Responsive
+
+- Thiết kế trang web tương thích với các thiết bị khác nhau
+- Thay đổi dựa vào kích thước màn hình
+
+### Breakpoint
+
+- Điểm kích thước màn hình mà tại đó giao diện sẽ thay đổi
+- Danh sách breakpoint phổ biến
+
+* 576px
+* 768px
+* 992px
+* 1200px
+* 1400px
+
+### Media query
+
+- Áp dụng breakpoint vào css
+- Cú pháp
+
+```css
+@media screen and (max-width: 1399.98px) {
+  selector {
+    property: value;
+  }
+}
+
+@media screen and (max-width: 1199.98px) {
+  selector {
+    property: value;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  selector {
+    property: value;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  selector {
+    property: value;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  selector {
+    property: value;
+  }
+}
+```
