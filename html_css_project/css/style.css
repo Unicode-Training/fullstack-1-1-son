@@ -1,0 +1,106 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 0;
+  outline: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+  color: #333;
+  line-height: 1.5;
+  font-family: Poppins, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.header .top-bar {
+  background: #000;
+  padding: 12px 0;
+  color: #fafafa;
+  font-size: 1.4rem;
+}
+
+.header .top-bar a {
+  color: #fafafa;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-left: 8px;
+}
+
+.header .top-bar .top-bar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header .top-bar .multiple-language {
+  display: flex;
+  align-items: center;
+}
+.header .header-inner {
+  padding: 40px 0 16px;
+}
+.header .header-inner .header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .menu ul {
+  display: flex;
+  gap: 48px;
+}
+.header .menu ul li a {
+  display: block;
+}
+.header .menu ul li a:hover,
+.header .menu ul li.active a {
+  border-bottom: 1px solid #000;
+}
+.header .search-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header .search-box form {
+  display: flex;
+  background: #f5f5f5;
+  padding: 0 10px;
+}
+.header .search-box form input,
+.header .search-box form button {
+  background: transparent;
+}
+.header .search-box form input {
+  padding: 10px 0;
+  font-size: 1.2rem;
+}
+.header::after {
+  content: "";
+  height: 1px;
+  opacity: 0.3;
+  background: #4f4e4e;
+  display: block;
+}
