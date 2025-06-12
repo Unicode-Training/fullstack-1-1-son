@@ -64,3 +64,132 @@ Hằng số
 ++ --> Tăng 1 đơn vị
 -- --> Giảm 1 đơn vị
 ```
+
+2. Toán tử so sánh
+
+- Kết quả của toán tử so sánh luôn là true / false (Boolean)
+- Danh sách toán tử so sánh:
+
+```
+>, <, >=, <=
+==
+===
+!=
+!==
+```
+
+Lời khuyên:
+
+- Không thực phép so sánh: >, <, >=, <= với null và undefined --> Tránh các lỗi phi lý
+- Ưu tiên sử dụng so sánh === và !== --> Tránh các lỗi phi lý
+
+3. Toán tử gán (=)
+
+```
++=
+-=
+/=
+*=
+%=
+**=
+```
+
+4. Toán tử kết hợp (&&, ||, !)
+
+&&: Chỉ đúng nếu tất cả biểu thức con đều đúng
+||: Đúng khi 1 biểu thức con đúng
+!: Chuyển boolean sau để trả về kết quả phủ định
+
+5. Toán tử 3 ngôi (toán tử điều kiện)
+
+```
+dieukien ? giatridung : giatrisai
+```
+
+6. Toán tử nullish (??)
+
+```
+a ?? b
+```
+
+- Kiểm tra a xem giá trị có phải là undefined hoặc null không?
+- Nếu đúng trả về giá trị b
+- Nếu sau trả về giá trị a
+
+## Câu lệnh rẽ nhánh if else
+
+1. Câu lệnh if thiếu
+
+```
+if (dieukien) {
+    Cau lenh
+}
+```
+
+2. Câu lệnh if else đầy đủ
+
+```
+if (dieukien) {
+    Câu lệnh nếu đúng
+} else {
+    Câu lệnh nếu sai
+}
+```
+
+3. Câu lệnh if else nhiều nhánh
+
+```
+if (dieukien1) {
+    Câu lệnh 1
+} else if (dieukien2) {
+    Câu lệnh 2
+} else if (dieukien3) {
+    Câu lệnh 3
+}
+...else {
+    Câu lệnh n
+}
+```
+
+4. Câu lệnh if else lồng nhau
+
+```
+if (dieukien) {
+    if (dieukien) {
+
+    } else {
+
+    }
+} else {
+
+}
+```
+
+## Câu lệnh rẽ nhánh switch case
+
+```
+switch (variable) {
+    case value1:
+        Code
+        break;
+    case value2:
+        Code
+        break;
+    case value3:
+        Code
+        break;
+    default:
+        Code
+        break;
+}
+```
+
+## Vòng lặp for
+
+- Vòng lặp giúp lặp chương trình với số lần lặp xác định trước
+
+```
+for (bienchay; dieukienchay; buocnhay) {
+    Code
+}
+```
