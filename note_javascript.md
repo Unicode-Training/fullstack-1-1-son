@@ -193,3 +193,79 @@ for (bienchay; dieukienchay; buocnhay) {
     Code
 }
 ```
+
+## Vòng lặp while
+
+- Vòng lặp không biết trước số lần lặp mà sẽ dựa biểu thức
+
+```
+while (dieukien) {
+    Code
+}
+```
+
+```
+do {
+     Code
+} while (dieukien)
+```
+
+## Hàm
+
+- Dùng nhóm các đoạn chương trình con
+- Tái sử dụng
+
+Cú pháp
+
+```js
+function tenham() {
+  Code;
+}
+
+function tenham(thamso1, thamso2) {
+  Code;
+}
+```
+
+Ví dụ: getMessage
+
+Hàm return
+
+- Có giá trị trả về
+- Sử dụng từ khóa return
+
+Hàm không return (Void)
+
+- Trả về undefined
+
+Hàm ẩn danh (Hàm không tên)
+
+```js
+function() {
+    Code
+}
+```
+
+- Đưa vào tham số của hàm khác (Callback Function)
+- Gán vào 1 biến (Expression Function)
+
+Arrow function (Hàm mũi tên)
+
+```
+const tenham = () => {
+    Code
+}
+```
+
+Tham số còn lại (Rest parameter)
+
+```js
+const tenham = (thamso1, thamso2, ...thamsoconlai) => {};
+```
+
+Hàm closure
+
+- Hàm được định nghĩa bên trong 1 hàm khác
+- Có quyền truy cập vào các biến nằm ngoài phạm vi của nó
+
+Giải thuật đệ quy
