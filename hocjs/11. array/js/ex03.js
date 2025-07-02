@@ -46,15 +46,56 @@
 // });
 // console.log(newArr);
 
-const users = [
-  [1, "User 1", "user1@gmail.com"],
-  [2, "User 2", "user2@gmail.com"],
-  [3, "User 3", "user3@gmail.com"],
-];
-console.log(users);
-//Viết hàm lấy thông tin 1 user thông qua id
-//Yêu cầu: Dùng hàm find()
-const getUser = (id) => {
-  //Logic
-};
-console.log(getUser(2)); //[2, "User 2", "user2@gmail.com"]
+// const users = [
+//   [1, "User 1", "user1@gmail.com"],
+//   [2, "User 2", "user2@gmail.com"],
+//   [3, "User 3", "user3@gmail.com"],
+// ];
+// console.log(users);
+// //Viết hàm lấy thông tin 1 user thông qua id
+// //Yêu cầu: Dùng hàm find()
+// const getUser = (id) => {
+//   //Logic
+// };
+// console.log(getUser(2)); //[2, "User 2", "user2@gmail.com"]
+
+//Bài tập map
+
+//Bài 1: Dùng map để chuyển mảng dưới thành mảng mới bằng cách chuyển các số âm về 0
+// const input = [
+//   [1, -2, 3],
+//   [-4, 5, 6],
+//   [2, 5, -1],
+// ];
+
+//Output
+/*
+[
+  [1, 0, 3],
+  [0, 5, 6],
+  [2, 5, 0],
+]
+*/
+// const newArr = input.map((item) =>
+//   item.map((number) => (number < 0 ? 0 : number))
+// );
+// console.log(newArr);
+
+//Bài 2: Tạo mảng mới bằng cách đảo ngược mảng con (Không được thay đổi mảng ban đầu)
+
+// const input = [
+//   [1, -2, 3],
+//   [-4, 5, 6],
+//   [2, 5, -1],
+// ];
+
+// //Output
+// /*
+// [
+//   [3, -2, 1],
+//   [6, 5, -4],
+//   [-1, 5, 2],
+// ]
+// */
+// function handler(item) {}
+// const newArr = input.map(handler);
