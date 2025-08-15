@@ -157,76 +157,95 @@
 // console.log(users);
 // console.log(users[0].details.histories[0].a);
 
-const menus = [
-  {
-    id: 1,
-    title: "Menu 1",
-    parent: null,
-  },
-  {
-    id: 2,
-    title: "Menu 2",
-    parent: null,
-  },
-  {
-    id: 3,
-    title: "Menu 3",
-    parent: null,
-  },
-  {
-    id: 4,
-    title: "Menu 2.1",
-    parent: 2,
-  },
-  {
-    id: 5,
-    title: "Menu 2.2",
-    parent: 2,
-  },
-  {
-    id: 6,
-    title: "Menu 3.1",
-    parent: 3,
-  },
-  {
-    id: 7,
-    title: "Menu 3.2",
-    parent: 3,
-  },
-];
+// const menus = [
+//   {
+//     id: 1,
+//     title: "Menu 1",
+//     parent: null,
+//   },
+//   {
+//     id: 2,
+//     title: "Menu 2",
+//     parent: null,
+//   },
+//   {
+//     id: 3,
+//     title: "Menu 3",
+//     parent: null,
+//   },
+//   {
+//     id: 4,
+//     title: "Menu 2.1",
+//     parent: 2,
+//   },
+//   {
+//     id: 5,
+//     title: "Menu 2.2",
+//     parent: 2,
+//   },
+//   {
+//     id: 6,
+//     title: "Menu 3.1",
+//     parent: 3,
+//   },
+//   {
+//     id: 7,
+//     title: "Menu 3.2",
+//     parent: 3,
+//   },
+// ];
 
-const nested = [
-  {
-    id: 1,
-    title: "Menu 1",
-  },
-  {
-    id: 2,
-    title: "Menu 2",
-    children: [
-      {
-        id: 4,
-        title: "Menu 2.1",
-      },
-      {
-        id: 5,
-        title: "Menu 2.2",
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: "Menu 3",
-    parent: null,
-    children: [
-      {
-        id: 6,
-        title: "Menu 3.1",
-      },
-      {
-        id: 7,
-        title: "Menu 3.2",
-      },
-    ],
-  },
-];
+// const buildMenu = (menus, parent = null) => {
+//   const result = [];
+//   for (let i = 0; i < menus.length; i++) {
+//     const item = menus[i];
+//     if (item.parent === parent) {
+//       result.push(item);
+//       delete item.parent;
+//       const children = buildMenu(menus, item.id);
+//       if (children.length) {
+//         item.children = children;
+//       }
+//     }
+//   }
+//   return result;
+// };
+
+// const nested = buildMenu(menus);
+// console.log(nested);
+
+// const nested = [
+//   {
+//     id: 1,
+//     title: "Menu 1",
+//   },
+//   {
+//     id: 2,
+//     title: "Menu 2",
+//     children: [
+//       {
+//         id: 4,
+//         title: "Menu 2.1",
+//       },
+//       {
+//         id: 5,
+//         title: "Menu 2.2",
+//       },
+//     ],
+//   },
+//   {
+//     id: 3,
+//     title: "Menu 3",
+//
+//     children: [
+//       {
+//         id: 6,
+//         title: "Menu 3.1",
+//       },
+//       {
+//         id: 7,
+//         title: "Menu 3.2",
+//       },
+//     ],
+//   },
+// ];
