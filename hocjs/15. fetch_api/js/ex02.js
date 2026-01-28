@@ -1,19 +1,44 @@
 const app = {
+  currentPage: 1,
+  limit: 10,
   async getPosts(keyword = "") {
     //Gọi api
     try {
       this.renderLoading();
-      let url = `https://dummyjson.com/posts`;
+      //Tính skip
+      const skip = (this.currentPage - 1) * this.limit;
+      let url = `https://dummyjson.com/posts?limit=${this.limit}&skip=${skip}`;
       if (keyword) {
-        url = `https://dummyjson.com/posts/search?q=${keyword}`;
+        url = `https://dummyjson.com/posts/search?q=${keyword}&limit=${this.limit}&skip=${skip}`;
       }
       const response = await fetch(url);
       const data = await response.json();
       const posts = data.posts;
+      const total = data.total;
+      const pageNumber = Math.ceil(total / this.limit);
       this.renderPosts(posts);
+      this.renderPaginate(pageNumber);
     } catch (error) {
       this.renderError(error.message);
     }
+  },
+  renderPaginate(pageNumber) {
+    const paginationEl = document.querySelector(".js-pagination");
+    let html = "";
+    for (let i = 1; i <= pageNumber; i++) {
+      html += `<span
+          class="js-page border px-3 py-1 cursor-pointer hover:bg-green-700 hover:text-white ${i === this.currentPage ? "page-active" : ""}"
+          >${i}</span
+        >`;
+    }
+    paginationEl.innerHTML = html;
+    paginationEl.addEventListener("click", (e) => {
+      if (e.target.classList.contains("js-page")) {
+        const page = +e.target.innerText;
+        this.currentPage = page;
+        this.getPosts();
+      }
+    });
   },
   renderLoading() {
     const postListEl = document.querySelector(".js-post-list");
@@ -29,7 +54,7 @@ const app = {
     const html = posts
       .map(
         (
-          post
+          post,
         ) => `<div id="post-${post.id}" class="border border-[#ddd] p-3 mb-3">
         <h2 class="js-post-title text-2xl mb-3">
          ${post.title}
@@ -48,7 +73,7 @@ const app = {
             <span class="cursor-pointer text-red-600">Xóa</span>
           </div>
         </div>
-      </div>`
+      </div>`,
       )
       .join("");
     postListEl.innerHTML = html;
@@ -69,8 +94,9 @@ const app = {
         bodyEl.value = post.body;
 
         const formEl = document.querySelector(".js-form");
-        formEl.addEventListener("submit", async (e) => {
+        const handleSubmit = async (e) => {
           e.preventDefault();
+
           const titleEl = document.querySelector(".js-title");
           const bodyEl = document.querySelector(".js-body");
           const title = titleEl.value;
@@ -87,8 +113,10 @@ const app = {
             postTitleEl.innerText = response.title;
             postBodyEl.innerText = response.body;
             modalEl.classList.add("hidden");
+            formEl.removeEventListener("submit", handleSubmit);
           }
-        });
+        };
+        formEl.addEventListener("submit", handleSubmit);
       }
     });
 
@@ -115,11 +143,23 @@ const app = {
   },
   search() {
     const inputEl = document.querySelector(".js-search");
+    let timeoutId;
     inputEl.addEventListener("input", () => {
-      const keyword = inputEl.value;
-      this.getPosts(keyword);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      timeoutId = setTimeout(() => {
+        const keyword = inputEl.value;
+        this.getPosts(keyword);
+      }, 500);
     });
   },
+  //a --> setTimeout --> Chờ 500ms
+  //Xóa setTimeout của chữ a
+  //b --> setTimeout --> Chờ 500ms
+  //Xóa setTimeout của chữ b
+  //c --> setTimeout --> Chờ 500ms
+  //Kỹ thuật debounce
   init() {
     this.getPosts();
     this.search();

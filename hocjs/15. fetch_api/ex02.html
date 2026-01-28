@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,9 @@
     <style type="text/tailwindcss">
       .active {
         @apply bg-yellow-500 text-white;
+      }
+      .page-active {
+        @apply bg-green-600 text-white;
       }
     </style>
   </head>
@@ -33,6 +36,7 @@
         </button>
       </div>
       <div class="js-post-list"></div>
+      <div class="js-pagination flex gap-1 flex-wrap"></div>
       <div class="js-modal hidden">
         <div
           class="w-[80%] mx-auto border border-[#ddd] fixed top-10 bg-white z-99 p-5 rounded-lg"
