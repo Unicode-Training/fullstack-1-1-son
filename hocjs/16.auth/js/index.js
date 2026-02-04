@@ -12,13 +12,14 @@ loginFormEl.addEventListener("submit", async (e) => {
   if (!token) {
     setMessage("Email hoặc mật khẩu không chính xác");
   } else {
-    saveAccessToken(token);
+    saveToken(token);
     setMessage("Đăng nhập thành công");
   }
 });
 
-const saveAccessToken = (token) => {
+const saveToken = (token) => {
   localStorage.setItem("access_token", token.access_token);
+  localStorage.setItem("refresh_token", token.refresh_token);
 };
 
 const setMessage = (msg) => {
