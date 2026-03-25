@@ -20,6 +20,31 @@ model User {
   status    Boolean
   createdAt DateTime @db.Timestamp()
   updatedAt DateTime @db.Timestamp()
+  posts     Post[]
+  phone     Phone?
 
   @@map("users")
+}
+
+model Phone {
+  id        Int      @id @default(autoincrement())
+  phone     String   @db.VarChar(15)
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @db.Timestamp()
+  updatedAt DateTime @db.Timestamp()
+
+  @@map("phones")
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(200)
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  status    Boolean?  @default(true)
+  createdAt DateTime? @db.Timestamp()
+  updatedAt DateTime? @db.Timestamp()
+
+  @@map("posts")
 }
