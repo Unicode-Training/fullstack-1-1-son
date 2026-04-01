@@ -16,11 +16,14 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
 
     const token = request.headers["authorization"]?.split(" ")[1];
-    const user = await this.authService.profile(token as string);
+    const data = await this.authService.profile(token as string);
+    const { jti, user, exp } = data as any;
     if (!user) {
       throw new UnauthorizedException("Token invalid");
     }
     request.user = user;
+    request.jti = jti;
+    request.exp = exp;
     return true;
   }
 }

@@ -1,21 +1,32 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
-import { AuthService } from "./auth.service";
 import {
-  type RefreshTokenData,
-  type LoginData,
-  type RegisterData,
-} from "src/types/auth.type";
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+} from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { type RefreshTokenData } from "src/types/auth.type";
 import { AuthGuard } from "src/guards/auth/auth.guard";
+import { RegisterDto } from "./dto/register.dto";
+import { LoginDto } from "./dto/login.dto";
 
 @Controller("auth")
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Post("/login")
-  login(@Body() dataLogin: LoginData) {
-    return this.authService.login(dataLogin);
+  async login(@Body() dataLogin: LoginDto) {
+    const token = await this.authService.login(dataLogin);
+    return {
+      success: true,
+      data: token,
+      message: "Đăng nhập thành công",
+    };
   }
   @Post("/register")
-  register(@Body() dataRegister: RegisterData) {
+  register(@Body() dataRegister: RegisterDto) {
     return this.authService.register(dataRegister);
   }
   @Post("/refresh-token")
@@ -27,6 +38,15 @@ export class AuthController {
   profile(@Req() a: any) {
     //Kiểm tra
     return a.user;
+  }
+
+  @Delete("/logout")
+  @UseGuards(AuthGuard)
+  logout(@Req() request: any) {
+    //Lấy được token để gửi sang service thêm vào redis
+    const jti = request.jti;
+    const exp = request.exp;
+    return this.authService.logout(jti as string, exp as number);
   }
 }
 

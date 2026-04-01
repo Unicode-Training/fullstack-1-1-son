@@ -1,9 +1,13 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { PrismaService } from "src/prisma.service";
 import { LoginData, RegisterData } from "src/types/auth.type";
 import { hashPassword, verifyPassword } from "src/utils/hashing";
 import { JwtService } from "@nestjs/jwt";
-
+import { redisClient } from "../utils/redis";
 @Injectable()
 export class AuthService {
   constructor(
@@ -27,6 +31,7 @@ export class AuthService {
     //3. Cấp phát token
     const payload = {
       id: user.id,
+      jti: crypto.randomUUID(),
     };
     const accessToken = await this.jwtService.signAsync(payload);
     const refreshToken = await this.jwtService.signAsync(payload, {
@@ -35,23 +40,35 @@ export class AuthService {
     });
     return { accessToken, refreshToken };
   }
-  register(dataRegister: RegisterData) {
-    return this.prismaService.user.create({
-      data: {
-        ...dataRegister,
-        password: hashPassword(dataRegister.password),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-    });
+  async register(dataRegister: RegisterData) {
+    try {
+      const data = await this.prismaService.user.create({
+        data: {
+          ...dataRegister,
+          password: hashPassword(dataRegister.password),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      });
+      return data;
+    } catch (error) {
+      if (error.code === "P2002") {
+        throw new BadRequestException("Email đã bị trùng");
+      }
+    }
   }
   async profile(token: string) {
     try {
-      const { id } = await this.jwtService.verifyAsync(token);
+      const { id, jti, exp } = await this.jwtService.verifyAsync(token);
+      //Check blacklist
+      const blacklist = await redisClient.get(`blacklist:${jti}`);
+      if (blacklist) {
+        return false;
+      }
       const user = await this.prismaService.user.findUnique({
         where: { id },
       });
-      return user;
+      return { user, jti, exp };
     } catch {
       return false;
     }
@@ -65,6 +82,7 @@ export class AuthService {
       //Tạo access token mới
       const payload = {
         id,
+        jti: crypto.randomUUID(),
       };
       const accessToken = await this.jwtService.signAsync(payload);
       return {
@@ -75,6 +93,13 @@ export class AuthService {
       throw new UnauthorizedException("Refresh token invalid");
     }
   }
+
+  async logout(jti: string, exp: number) {
+    //lưu token vào redis với expire bằng đúng thời gian sống của token
+    const seconds = Math.ceil(exp - Date.now() / 1000);
+    await redisClient.setEx(`blacklist:${jti}`, seconds, "1");
+  }
 }
 
 //redis
+//jwt --> jti

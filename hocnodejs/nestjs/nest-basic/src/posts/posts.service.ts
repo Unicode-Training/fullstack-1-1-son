@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "src/prisma.service";
 
 @Injectable()
 export class PostsService {
@@ -19,7 +19,7 @@ export class PostsService {
     const a: Where = {};
 
     if (status) {
-      a.status = status === 'true';
+      a.status = status === "true";
     }
     if (title) {
       a.title = {
@@ -39,6 +39,16 @@ export class PostsService {
       },
       include: {
         user: true,
+      },
+    });
+  }
+  create(postData: any, userId: number) {
+    return this.prismaService.post.create({
+      data: {
+        ...postData,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        userId,
       },
     });
   }
