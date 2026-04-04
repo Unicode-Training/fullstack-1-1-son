@@ -4,6 +4,7 @@ import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
 import { PrismaService } from "src/prisma.service";
 import { ConfigModule } from "@nestjs/config";
+import { BullModule } from "@nestjs/bullmq";
 
 @Module({
   controllers: [AuthController],
@@ -16,6 +17,9 @@ import { ConfigModule } from "@nestjs/config";
       signOptions: {
         expiresIn: process.env.JWT_ACCESS_EXPIRED as unknown as number,
       },
+    }),
+    BullModule.registerQueue({
+      name: "EMAIL", //tên queue, tự đặt
     }),
   ],
   exports: [AuthService],

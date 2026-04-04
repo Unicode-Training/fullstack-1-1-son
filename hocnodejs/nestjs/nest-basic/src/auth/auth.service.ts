@@ -8,11 +8,16 @@ import { LoginData, RegisterData } from "src/types/auth.type";
 import { hashPassword, verifyPassword } from "src/utils/hashing";
 import { JwtService } from "@nestjs/jwt";
 import { redisClient } from "../utils/redis";
+import { MailerService } from "@nestjs-modules/mailer";
+import { Queue } from "bullmq";
+import { InjectQueue } from "@nestjs/bullmq";
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly mailerService: MailerService,
+    @InjectQueue("EMAIL") private emailQueue: Queue,
   ) {}
   async login({ email, password }: LoginData) {
     //1. Kiểm tra email có tồn tại hay không?
@@ -38,6 +43,14 @@ export class AuthService {
       secret: process.env.JWT_REFRESH_SECRET,
       expiresIn: process.env.JWT_REFRESH_EXPIRED as unknown as number,
     });
+    //Gửi email --> add job vào hàng đợi
+    await this.emailQueue.add("login-notice", {
+      email: user.email,
+      name: user.name,
+      link: "http://unicode.vn/reset-password",
+      randomId: Math.random(),
+    });
+
     return { accessToken, refreshToken };
   }
   async register(dataRegister: RegisterData) {
@@ -52,8 +65,11 @@ export class AuthService {
       });
       return data;
     } catch (error) {
-      if (error.code === "P2002") {
-        throw new BadRequestException("Email đã bị trùng");
+      if (error instanceof Error) {
+        const err = error as any;
+        if (err.code === "P2002") {
+          throw new BadRequestException("Email đã bị trùng");
+        }
       }
     }
   }
