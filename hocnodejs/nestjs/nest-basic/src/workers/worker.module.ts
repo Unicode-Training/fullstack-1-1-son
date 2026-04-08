@@ -4,6 +4,7 @@ import { BullModule } from "@nestjs/bullmq";
 import { Module } from "@nestjs/common";
 import { join } from "path";
 import { EmailConsumer } from "../consumers/email.consumer";
+import { ReportConsumer } from "src/consumers/report.consumer";
 
 @Module({
   imports: [
@@ -33,8 +34,11 @@ import { EmailConsumer } from "../consumers/email.consumer";
         },
       },
     }),
-    BullModule.registerQueue({ name: "EMAIL" }),
+    BullModule.registerQueue({ name: "EMAIL01" }),
+    BullModule.registerQueue({
+      name: "REPORTS",
+    }),
   ],
-  providers: [EmailConsumer],
+  providers: [EmailConsumer, ReportConsumer],
 })
 export class WorkerModule {}

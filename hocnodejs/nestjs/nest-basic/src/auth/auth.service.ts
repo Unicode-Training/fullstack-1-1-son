@@ -8,7 +8,6 @@ import { LoginData, RegisterData } from "src/types/auth.type";
 import { hashPassword, verifyPassword } from "src/utils/hashing";
 import { JwtService } from "@nestjs/jwt";
 import { redisClient } from "../utils/redis";
-import { MailerService } from "@nestjs-modules/mailer";
 import { Queue } from "bullmq";
 import { InjectQueue } from "@nestjs/bullmq";
 @Injectable()
@@ -16,7 +15,6 @@ export class AuthService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
-    private readonly mailerService: MailerService,
     @InjectQueue("EMAIL") private emailQueue: Queue,
   ) {}
   async login({ email, password }: LoginData) {
