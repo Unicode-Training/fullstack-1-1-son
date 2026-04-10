@@ -23,6 +23,7 @@ model User {
   updatedAt DateTime @db.Timestamp()
   posts     Post[]
   phone     Phone?
+  role      String?  @default("user")
 
   @@map("users")
 }

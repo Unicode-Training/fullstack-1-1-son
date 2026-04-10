@@ -20,7 +20,7 @@ import { ReportConsumer } from "src/consumers/report.consumer";
         port: 465,
         auth: {
           user: "anhoang.unicode@gmail.com",
-          pass: "dbyn jobd ehms iuoi",
+          pass: "",
         },
       },
       defaults: {
@@ -34,7 +34,7 @@ import { ReportConsumer } from "src/consumers/report.consumer";
         },
       },
     }),
-    BullModule.registerQueue({ name: "EMAIL01" }),
+    BullModule.registerQueue({ name: "EMAIL" }),
     BullModule.registerQueue({
       name: "REPORTS",
     }),

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Post,
+  Put,
   Req,
   UseGuards,
 } from "@nestjs/common";
@@ -47,6 +48,33 @@ export class AuthController {
     const jti = request.jti;
     const exp = request.exp;
     return this.authService.logout(jti as string, exp as number);
+  }
+  @Post("/forgot-password")
+  async forgotPassword(@Body() { email }: { email: string }) {
+    await this.authService.forgotPassword(email);
+    return {
+      success: true,
+    };
+  }
+  @Post("/verify-otp")
+  async verifyOtp(@Body() { otp }: { otp: string }) {
+    await this.authService.verifyOtp(otp);
+    return { success: true };
+  }
+  @Put("/reset-password")
+  async resetPassword(
+    @Body()
+    body: {
+      password: string;
+      confirmPassword: string;
+      otp: string;
+    },
+  ) {
+    await this.authService.resetPassword(body);
+    return {
+      success: true,
+      message: "Đặt lại mật khẩu thành công",
+    };
   }
 }
 

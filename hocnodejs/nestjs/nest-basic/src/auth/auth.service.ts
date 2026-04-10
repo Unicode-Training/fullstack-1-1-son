@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
 import { PrismaService } from "src/prisma.service";
@@ -10,6 +11,7 @@ import { JwtService } from "@nestjs/jwt";
 import { redisClient } from "../utils/redis";
 import { Queue } from "bullmq";
 import { InjectQueue } from "@nestjs/bullmq";
+import crypto from "crypto";
 @Injectable()
 export class AuthService {
   constructor(
@@ -112,6 +114,64 @@ export class AuthService {
     //lưu token vào redis với expire bằng đúng thời gian sống của token
     const seconds = Math.ceil(exp - Date.now() / 1000);
     await redisClient.setEx(`blacklist:${jti}`, seconds, "1");
+  }
+
+  async forgotPassword(email: string) {
+    //Check email trên db
+    const user = await this.prismaService.user.findUnique({
+      where: { email },
+    });
+    if (!user) {
+      throw new NotFoundException("User không tồn tại");
+    }
+    //Tạo otp 6 số
+    const otp = crypto.randomInt(100000, 999999).toString();
+    //Lưu vào redis kèm userId
+    const ttl = 300;
+    await redisClient.setEx(`forgotPassword:${otp}`, ttl, user.id.toString());
+
+    //addJob để gửi email
+    await this.emailQueue.add("forgotPassword-otp", {
+      otp,
+      email: user.email,
+    });
+  }
+  async verifyOtp(otp: string) {
+    const userIdFromRedis = await redisClient.get(`forgotPassword:${otp}`);
+    if (!userIdFromRedis) {
+      throw new BadRequestException("OTP không hợp lệ");
+    }
+    return userIdFromRedis;
+  }
+
+  async resetPassword({
+    password,
+    confirmPassword,
+    otp,
+  }: {
+    password: string;
+    confirmPassword: string;
+    otp: string;
+  }) {
+    if (password !== confirmPassword) {
+      throw new BadRequestException("2 mật khẩu không khớp nhau");
+    }
+    const userId = await this.verifyOtp(otp);
+    const newPassword = hashPassword(password);
+    const user = await this.prismaService.user.update({
+      where: { id: +userId },
+      data: {
+        password: newPassword,
+      },
+    });
+
+    // add Job để gửi email
+    await this.emailQueue.add("reset-password", {
+      email: user.email,
+    });
+
+    //Xóa otp khỏi redis
+    await redisClient.del(`forgotPassword:${otp}`);
   }
 }
 

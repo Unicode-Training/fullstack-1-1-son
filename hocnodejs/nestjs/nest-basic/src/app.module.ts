@@ -12,6 +12,7 @@ import { ZodSerializerInterceptor, ZodValidationPipe } from "nestjs-zod";
 // import { join } from "path";
 import { BullModule } from "@nestjs/bullmq";
 import { ReportsModule } from './reports/reports.module';
+import { DashboardModule } from './admin/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ReportsModule } from './reports/reports.module';
       },
     }),
     ReportsModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [
