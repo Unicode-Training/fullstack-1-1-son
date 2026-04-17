@@ -5,15 +5,18 @@ import { AppService } from "./app.service";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
 import { PostsModule } from "./posts/posts.module";
-import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
+import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
 import { ZodSerializerInterceptor, ZodValidationPipe } from "nestjs-zod";
 // import { MailerModule } from "@nestjs-modules/mailer";
 // import { EjsAdapter } from "@nestjs-modules/mailer/adapters/ejs.adapter";
 // import { join } from "path";
 import { BullModule } from "@nestjs/bullmq";
-import { ReportsModule } from './reports/reports.module';
-import { DashboardModule } from './admin/dashboard/dashboard.module';
-
+import { ReportsModule } from "./reports/reports.module";
+import { DashboardModule } from "./admin/dashboard/dashboard.module";
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { AdminUsersModule } from "./admin/users/users.module";
+import { ProductsModule } from "./admin/products/products.module";
+import { PermissionsModule } from './admin/permissions/permissions.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -28,6 +31,17 @@ import { DashboardModule } from './admin/dashboard/dashboard.module';
     }),
     ReportsModule,
     DashboardModule,
+    AdminUsersModule,
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 5,
+        },
+      ],
+    }),
+    ProductsModule,
+    PermissionsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -39,6 +53,10 @@ import { DashboardModule } from './admin/dashboard/dashboard.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: ZodSerializerInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })
