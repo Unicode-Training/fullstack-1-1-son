@@ -27,6 +27,7 @@ model User {
   adminRoles      UserRole[]
   userPermissions UserPermission[]
   isSuperAdmin    Boolean          @default(false)
+  socketId        String?
 
   @@map("users")
 }

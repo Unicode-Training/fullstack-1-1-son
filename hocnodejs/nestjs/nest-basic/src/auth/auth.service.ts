@@ -44,12 +44,19 @@ export class AuthService {
       expiresIn: process.env.JWT_REFRESH_EXPIRED as unknown as number,
     });
     //Gửi email --> add job vào hàng đợi
-    await this.emailQueue.add("login-notice", {
-      email: user.email,
-      name: user.name,
-      link: "http://unicode.vn/reset-password",
-      randomId: Math.random(),
-    });
+    // await this.emailQueue.add("login-notice", {
+    //   email: user.email,
+    //   name: user.name,
+    //   link: "http://unicode.vn/reset-password",
+    //   randomId: Math.random(),
+    // });
+
+    //Lấy jti của refresh token
+    const refreshTokenPayload = await this.jwtService.decode(refreshToken);
+   
+    const ttl = Math.ceil(refreshTokenPayload.exp - Date.now() / 1000)
+    // key redis: refreshToken:{userId}:{jti}
+    await redisClient.setEx(`refreshToken:${refreshTokenPayload.id}:${refreshTokenPayload.jti}`, ttl, "1");
 
     return { accessToken, refreshToken };
   }
@@ -92,18 +99,37 @@ export class AuthService {
   async refreshToken(refreshToken: string) {
     //Kiểm tra tính hợp lệ
     try {
-      const { id } = await this.jwtService.verifyAsync(refreshToken, {
+      const { id, jti } = await this.jwtService.verifyAsync(refreshToken, {
         secret: process.env.JWT_REFRESH_SECRET,
       });
+      //Kiểm tra refresh có tồn tại trên redis hay không?
+      const tokenFromRedis = await redisClient.get(`refreshToken:${id}:${jti}`);
+      if (!tokenFromRedis) {
+        throw new Error("Refresh token invalid")
+      }
       //Tạo access token mới
       const payload = {
         id,
         jti: crypto.randomUUID(),
       };
       const accessToken = await this.jwtService.signAsync(payload);
+      const refreshTokenNew = await this.jwtService.signAsync(payload, {
+        secret: process.env.JWT_REFRESH_SECRET,
+        expiresIn: process.env.JWT_REFRESH_EXPIRED as unknown as number,
+      });
+      //Thu hồi refresh token cũ
+      await redisClient.del(`refreshToken:${id}:${jti}`);
+
+      //Lưu jti refresh mới redis
+      const refreshTokenPayload = await this.jwtService.decode(refreshTokenNew);
+   
+      const ttl = Math.ceil(refreshTokenPayload.exp - Date.now() / 1000)
+      // key redis: refreshToken:{userId}:{jti}
+      await redisClient.setEx(`refreshToken:${refreshTokenPayload.id}:${refreshTokenPayload.jti}`, ttl, "1");
+
       return {
         accessToken,
-        refreshToken,
+        refreshToken: refreshTokenNew,
       };
     } catch {
       throw new UnauthorizedException("Refresh token invalid");
@@ -172,6 +198,19 @@ export class AuthService {
 
     //Xóa otp khỏi redis
     await redisClient.del(`forgotPassword:${otp}`);
+  }
+
+   syncSocketWithUser(socketId: string, userId: number) {
+     return this.prismaService.user.update({
+      where: {id: userId},
+      data: {socketId}
+    })
+  }
+
+  getSocketIdByUser(userId: number) {
+    return this.prismaService.user.findUnique({
+      where: {id: userId}
+    }); 
   }
 }
 

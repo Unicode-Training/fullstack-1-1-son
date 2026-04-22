@@ -17,6 +17,7 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { AdminUsersModule } from "./admin/users/users.module";
 import { ProductsModule } from "./admin/products/products.module";
 import { PermissionsModule } from './admin/permissions/permissions.module';
+import { SocketGateway } from './gateway/socket/socket.gateway';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -58,6 +59,7 @@ import { PermissionsModule } from './admin/permissions/permissions.module';
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
     },
+    SocketGateway,
   ],
 })
 export class AppModule {}
