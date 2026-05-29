@@ -1,11 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { Cache, CACHE_MANAGER } from "@nestjs/cache-manager";
+import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { CACHE_KEYS } from "src/constants/cache.constant";
 import { PrismaService } from "src/prisma.service";
+import { cache, incrementCache } from "src/utils/cache";
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService, @Inject(CACHE_MANAGER) private cacheManager: Cache) { }
 
-  findAll(query: { status: string; title: string }) {
+  async findAll(query: { status: string; title: string }) {
     const { status, title } = query;
 
     // return this.prismaService
@@ -26,29 +29,49 @@ export class PostsService {
         contains: title,
       };
     }
-    console.log(a);
 
-    return this.prismaService.post.findMany({
+    let version = await this.cacheManager.get(`posts:list:version`);
+    if (!version) {
+      version = await incrementCache(this.cacheManager, 'posts:list:version');
+    }
+    console.log(CACHE_KEYS.POSTS.LISTWITHQUERY(version as number, { status, title }));
+    return cache(this.cacheManager, CACHE_KEYS.POSTS.LISTWITHQUERY(version as number, { status, title }), () => this.prismaService.post.findMany({
       where: a,
-    });
+    }));
+    // console.log(CACHE_KEYS.POSTS.LISTWITHQUERY({ title, status }));
+    // return cache(this.cacheManager, CACHE_KEYS.POSTS.LISTWITHQUERY({ title, status }), () => this.prismaService.post.findMany({
+    //   where: a,
+    // }));
   }
-  find(id: number) {
-    return this.prismaService.post.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        user: true,
-      },
-    });
+  async find(id: number) {
+    const postFromCache = await this.cacheManager.get(CACHE_KEYS.POSTS.DETAIL(id));
+    if (!postFromCache) {
+      const post = await this.prismaService.post.findUnique({
+        where: {
+          id,
+        },
+        include: {
+          user: true,
+        },
+      });
+      if (!post) {
+        throw new NotFoundException("Post không tồn tại");
+      }
+      await this.cacheManager.set(CACHE_KEYS.POSTS.DETAIL(id), post);
+      return post
+    }
+
+    return postFromCache;
   }
-  create(postData: any, userId: number) {
+  async create(postData: any) {
+    // await this.cacheManager.del(CACHE_KEYS.POSTS.LIST);
+    await incrementCache(this.cacheManager, 'posts:list:version')
     return this.prismaService.post.create({
       data: {
         ...postData,
         createdAt: new Date(),
         updatedAt: new Date(),
-        userId,
+        userId: 18,
       },
     });
   }

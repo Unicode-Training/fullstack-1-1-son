@@ -18,6 +18,13 @@ import { AdminUsersModule } from "./admin/users/users.module";
 import { ProductsModule } from "./admin/products/products.module";
 import { PermissionsModule } from './admin/permissions/permissions.module';
 import { SocketGateway } from './gateway/socket/socket.gateway';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { OrdersModule } from './orders/orders.module';
+import { NotificationsModule } from './admin/notifications/notifications.module';
+import { CacheModule } from "@nestjs/cache-manager";
+import KeyvRedis from '@keyv/redis';
+import { Keyv } from 'keyv';
+import { KeyvCacheableMemory } from 'cacheable';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -37,12 +44,28 @@ import { SocketGateway } from './gateway/socket/socket.gateway';
       throttlers: [
         {
           ttl: 60000,
-          limit: 5,
+          limit: 500,
         },
       ],
     }),
     ProductsModule,
     PermissionsModule,
+    EventEmitterModule.forRoot(),
+    OrdersModule,
+    NotificationsModule,
+    CacheModule.registerAsync({
+      isGlobal: true,
+      useFactory: () => {
+        return {
+          stores: [
+            new Keyv({
+              store: new KeyvCacheableMemory({ ttl: 60000, lruSize: 5000 }),
+            }),
+            new KeyvRedis('redis://localhost:6379'),
+          ],
+        };
+      },
+    })
   ],
   controllers: [AppController],
   providers: [
@@ -62,4 +85,10 @@ import { SocketGateway } from './gateway/socket/socket.gateway';
     SocketGateway,
   ],
 })
-export class AppModule {}
+export class AppModule { }
+
+//register
+// - công việc 1 --> gửi email
+// - công việc 2 --> đẩy data sang phần mềm phân tích dữ liệu
+// - công việc 3 --> gửi thông báo telegram
+//áp dụng: các hàm đã có sẵn nhưng các file khác

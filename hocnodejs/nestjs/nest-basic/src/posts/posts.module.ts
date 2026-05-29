@@ -9,4 +9,4 @@ import { AuthModule } from "src/auth/auth.module";
   providers: [PostsService, PrismaService],
   imports: [AuthModule],
 })
-export class PostsModule {}
+export class PostsModule { }

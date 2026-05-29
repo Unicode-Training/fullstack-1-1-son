@@ -5,15 +5,18 @@ import {
   Query,
   Post,
   Body,
-  UseGuards,
-  Req,
+  // UseGuards,
+  // Req,
+  // UseFilters,
 } from "@nestjs/common";
 import { PostsService } from "./posts.service";
-import { AuthGuard } from "src/guards/auth/auth.guard";
+// import { AuthGuard } from "src/guards/auth/auth.guard";
+// import { HttpExceptionFilter } from "src/exceptions/http-exception.filter";
 
 @Controller("posts")
+// @UseFilters(HttpExceptionFilter)
 export class PostsController {
-  constructor(private readonly postsService: PostsService) {}
+  constructor(private readonly postsService: PostsService) { }
 
   @Get("")
   findAll(@Query() query: { status: string; title: string }) {
@@ -26,8 +29,8 @@ export class PostsController {
   }
 
   @Post("")
-  @UseGuards(AuthGuard)
-  create(@Body() body: any, @Req() request: any) {
-    return this.postsService.create(body, request.user.id as number);
+  // @UseGuards(AuthGuard)
+  create(@Body() body: any) {
+    return this.postsService.create(body);
   }
 }
