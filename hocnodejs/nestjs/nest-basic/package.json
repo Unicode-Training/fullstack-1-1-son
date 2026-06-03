@@ -37,6 +37,7 @@
     "@nestjs/websockets": "^11.1.19",
     "@prisma/adapter-mariadb": "^7.5.0",
     "@prisma/client": "^7.5.0",
+    "axios": "^1.17.0",
     "bcrypt": "^6.0.0",
     "bullmq": "^5.73.0",
     "cache-manager": "^7.2.8",
